@@ -321,7 +321,7 @@ outputs:
 timewarptv --list-audio
 ```
 
-and put the HDMI one in `config.yaml` on the drive (`nano /media/nostalgiabox/config.yaml`):
+and put the HDMI one in `config.yaml` on the drive (`nano /media/timewarptv/config.yaml`):
 
 ```yaml
 audio_device: "alsa/default:CARD=vc4hdmi"   # HDMI on a Pi 3
@@ -404,7 +404,7 @@ guide card (`timewarptv --make-guide` on the Pi) so channel 1 lists it.
 cd ~/TimewarpTV
 git pull
 ./scripts/install.sh               # picks up new dependencies and commands
-sudo systemctl restart nostalgiabox
+sudo systemctl restart timewarptv
 ```
 
 (With the read-only overlay on, turn it off first, update, then turn it back
@@ -478,12 +478,12 @@ Turn breaks off for one channel with `breaks: false` on that channel.
 
 ## 5. Troubleshooting
 
-Logs: `journalctl -u nostalgiabox -f` (follow live) or `journalctl -u nostalgiabox -b` (this boot).
+Logs: `journalctl -u timewarptv -f` (follow live) or `journalctl -u timewarptv -b` (this boot).
 
 - **The TV opens its own home screen, not the box.** Set the TV's power-on input
   to the Pi's HDMI port (Part G).
 - **No picture.** Check the TV is on the right HDMI input, and that the service
-  is running: `systemctl status nostalgiabox`.
+  is running: `systemctl status timewarptv`.
 - **No sound.** Set `audio_device` to the HDMI output (Part G).
 - **A channel shows 0 episodes in `timewarptv --check`.** Its `path` doesn't
   match the folder on the drive, or the files use an unusual extension (see
@@ -548,11 +548,6 @@ TimewarpTV began as a fork of **[NostalgiaBox](https://github.com/landonbtw/Nost
 by [landonbtw](https://github.com/landonbtw) — the retro-TV player for a
 Raspberry Pi that it's built on: the channels, the shuffle, the channel banner
 and volume bar, the CRT look. Thank you.
-
-The original name survives only in two system-level names an installed box
-depends on: the `nostalgiabox` service and the `/media/nostalgiabox` mount
-point. (The old `nostalgiabox` command also still works, as an alias of
-`timewarptv`, so older installs keep running.)
 
 ## License
 

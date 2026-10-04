@@ -7,7 +7,7 @@
 # Usage:
 #   ./scripts/install-service.sh [MEDIA_PATH] [DRIVE_LABEL]
 #
-#   MEDIA_PATH   where the drive is mounted     (default: /media/nostalgiabox)
+#   MEDIA_PATH   where the drive is mounted     (default: /media/timewarptv)
 #   DRIVE_LABEL  the drive's volume label       (default: WARPMEDIA)
 #
 # The drive is matched by LABEL, not by UUID, so a second drive formatted with
@@ -19,11 +19,11 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-TEMPLATE="${REPO_DIR}/scripts/nostalgiabox.service"
-TARGET="/etc/systemd/system/nostalgiabox.service"
-UDEV_RULE="/etc/udev/rules.d/99-nostalgiabox-media.rules"
-FSTAB_MARKER="# nostalgiabox media drive (managed by scripts/install-service.sh)"
-MEDIA_PATH="${1:-/media/nostalgiabox}"
+TEMPLATE="${REPO_DIR}/scripts/timewarptv.service"
+TARGET="/etc/systemd/system/timewarptv.service"
+UDEV_RULE="/etc/udev/rules.d/99-timewarptv-media.rules"
+FSTAB_MARKER="# timewarptv media drive (managed by scripts/install-service.sh)"
+MEDIA_PATH="${1:-/media/timewarptv}"
 DRIVE_LABEL="${2:-WARPMEDIA}"
 
 RUN_USER="${SUDO_USER:-$USER}"
@@ -62,9 +62,9 @@ case "${FSTYPE}" in
     OPTS="nofail,noatime,x-systemd.device-timeout=10s" ;;
 esac
 
-echo "==> Adding the drive to /etc/fstab (backup: /etc/fstab.nostalgiabox.bak)"
+echo "==> Adding the drive to /etc/fstab (backup: /etc/fstab.timewarptv.bak)"
 sudo mkdir -p "${MEDIA_PATH}"
-sudo cp /etc/fstab /etc/fstab.nostalgiabox.bak
+sudo cp /etc/fstab /etc/fstab.timewarptv.bak
 fstab_with_media_entry() {
   # Everything except a previous run's entry (the marker line and the line
   # after it), then the fresh entry. Exact string match - no regex surprises.
@@ -104,10 +104,10 @@ rm -f "${tmp}"
 
 echo "==> Allowing '${RUN_USER}' to power off without a password (for the"
 echo "    volume-down-past-zero shutdown)"
-sudo tee /etc/sudoers.d/nostalgiabox-poweroff > /dev/null <<EOF
+sudo tee /etc/sudoers.d/timewarptv-poweroff > /dev/null <<EOF
 ${RUN_USER} ALL=(root) NOPASSWD: /sbin/poweroff, /usr/sbin/poweroff, /sbin/shutdown, /usr/sbin/shutdown, /usr/bin/systemctl poweroff
 EOF
-sudo chmod 440 /etc/sudoers.d/nostalgiabox-poweroff
+sudo chmod 440 /etc/sudoers.d/timewarptv-poweroff
 
 echo "==> Disabling the network-wait boot stall (this box runs fully offline)"
 sudo systemctl disable NetworkManager-wait-online.service 2>/dev/null || true
@@ -116,8 +116,8 @@ sudo systemctl mask NetworkManager-wait-online.service 2>/dev/null || true
 echo "==> Enabling and starting everything"
 sudo systemctl daemon-reload
 sudo systemctl start "${MOUNT_UNIT}" 2>/dev/null || true
-sudo systemctl enable nostalgiabox.service
-sudo systemctl restart nostalgiabox.service
+sudo systemctl enable timewarptv.service
+sudo systemctl restart timewarptv.service
 
 if findmnt -rn "${MEDIA_PATH}" > /dev/null; then
   MOUNTED="yes - $(findmnt -rno SOURCE,FSTYPE "${MEDIA_PATH}")"
@@ -138,8 +138,8 @@ cat <<EOF
   ${MEDIA_PATH}/config.yaml:       ${CONFIG}
 
 Handy commands:
-  systemctl status nostalgiabox          # is it running?
-  journalctl -u nostalgiabox -b          # this boot's logs
-  sudo systemctl stop nostalgiabox       # stop the TV (e.g. to test by hand)
-  sudo systemctl disable nostalgiabox    # don't start on boot
+  systemctl status timewarptv          # is it running?
+  journalctl -u timewarptv -b          # this boot's logs
+  sudo systemctl stop timewarptv       # stop the TV (e.g. to test by hand)
+  sudo systemctl disable timewarptv    # don't start on boot
 EOF

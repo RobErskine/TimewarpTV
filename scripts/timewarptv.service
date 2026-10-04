@@ -1,7 +1,7 @@
 # systemd unit template for TimewarpTV.
 #
 # This is a TEMPLATE - scripts/install-service.sh fills in the real user, group,
-# home and paths and installs it to /etc/systemd/system/nostalgiabox.service.
+# home and paths and installs it to /etc/systemd/system/timewarptv.service.
 # You can also copy/edit it by hand.
 #
 # It starts the TV directly on the console (no desktop needed): mpv renders via
@@ -44,7 +44,7 @@ RestartSec=3
 StandardInput=tty
 # ...but send our log to the journal, not onto the TV behind the picture. With
 # a tty for input, systemd otherwise sends output there too, which leaves
-# `journalctl -u nostalgiabox` empty exactly when you need it.
+# `journalctl -u timewarptv` empty exactly when you need it.
 StandardOutput=journal
 StandardError=journal
 TTYPath=/dev/tty1

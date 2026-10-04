@@ -36,9 +36,6 @@ dev = [
 
 [project.scripts]
 timewarptv = "timewarptv.__main__:main"
-# The original command name, kept so boxes installed before the rename - whose
-# service still starts it - keep working.
-nostalgiabox = "timewarptv.__main__:main"
 
 [tool.setuptools.packages.find]
 include = ["timewarptv*"]

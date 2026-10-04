@@ -194,7 +194,7 @@ def main(argv: Optional[list] = None) -> int:
     parser.add_argument("-c", "--config", required=True, help="path to config.yaml")
     parser.add_argument(
         "-o", "--out", required=True,
-        help=f"output video (e.g. /media/nostalgiabox/01-guide/{GUIDE_FILENAME})",
+        help=f"output video (e.g. /media/timewarptv/01-guide/{GUIDE_FILENAME})",
     )
     parser.add_argument(
         "--seconds", type=int, default=DEFAULT_SECONDS,

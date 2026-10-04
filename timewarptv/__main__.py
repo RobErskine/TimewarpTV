@@ -19,7 +19,7 @@ log = logging.getLogger("timewarptv")
 _DEFAULT_CONFIG_LOCATIONS = (
     Path("config.yaml"),
     # The media drive, where an installed box keeps its config (see README).
-    Path("/media/nostalgiabox/config.yaml"),
+    Path("/media/timewarptv/config.yaml"),
     Path.home() / ".config" / "timewarptv" / "config.yaml",
     Path("/etc/timewarptv/config.yaml"),
 )

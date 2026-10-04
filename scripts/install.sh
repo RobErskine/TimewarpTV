@@ -39,9 +39,6 @@ echo "==> Installing TimewarpTV and Python dependencies"
 pip install --upgrade pip
 # Editable install so that a plain `git pull` picks up code updates without
 # needing to reinstall (just restart the service afterwards).
-# The package was once called "nostalgiabox"; drop that registration so an
-# updated box doesn't keep a stale one pointing at a folder that's gone.
-pip uninstall -y -q nostalgiabox 2>/dev/null || true
 pip install -e "${REPO_DIR}[pi]"
 
 echo "==> Generating filler assets (static + colour bars)"
@@ -65,7 +62,7 @@ echo "==> Putting the timewarptv command on the PATH"
 # from any shell, without activating anything.
 sudo ln -sf "${REPO_DIR}/.venv/bin/timewarptv" /usr/local/bin/timewarptv
 
-DRIVE_CONFIG="/media/nostalgiabox/config.yaml"
+DRIVE_CONFIG="/media/timewarptv/config.yaml"
 if [[ -f "${DRIVE_CONFIG}" ]]; then
   echo "==> Checking the library on the drive"
   timewarptv --check --config "${DRIVE_CONFIG}" || \

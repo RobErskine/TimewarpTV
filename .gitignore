@@ -15,7 +15,6 @@ venv/
 config.yaml
 scripts/library.tsv
 # Resume positions (normally on the media drive, next to config.yaml).
-.nostalgiabox-state.json
 .timewarptv-state.json
 # Dev sandbox library + config (created by `scripts/make-dev-library.sh`).
 config.dev.yaml
