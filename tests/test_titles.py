@@ -131,3 +131,11 @@ def test_a_numbered_short_in_a_collection_is_a_film_not_season_eleven():
 def test_a_folder_named_by_its_marker_is_skipped_for_the_show_name():
     np = cap("Hunger Force Show S01-S11/HFS S04M01 (360p)/HFS S04M01 The Movie (2007 360p re-webrip).mp4")
     assert np == NowPlaying("Hunger Force Show", "S04 M01  The Movie")
+
+
+def test_a_dash_delimited_episode_number_wins_over_a_year():
+    """'Series - E03 - Title (1942)': numbered shorts in a collection. The
+    dashes make it unambiguous, unlike 'Star Tales Episode 4 (1977)'."""
+    np = cap("Cartoon Collection (1930-1969)/Cartoon Collection - E03 - Hold the Lion, Please (1942) (1080p x265).mkv")
+
+    assert np == NowPlaying("Cartoon Collection", "E03  Hold the Lion, Please")

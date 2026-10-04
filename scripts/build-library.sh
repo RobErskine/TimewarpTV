@@ -113,9 +113,34 @@ RSYNC_FILTER+=( --exclude='*' )
 # packet in the last few seconds. A download cut short keeps a valid header (so
 # the full duration is still reported) but has no packets near the end. Both
 # pts and dts are read: AVI reports pts as N/A.
+# has_hole <file>: true if any of 16 evenly spaced 64 KiB samples is all
+# zeros - a gap an out-of-order download never filled in. Such a file has a
+# good header and a good ending (so the ffprobe checks below pass) but dies in
+# the middle. Real video data never has 64 KiB of zeros; sampling keeps a
+# check of the whole drive to seconds per thousand files.
+has_hole() {
+  python3 -c '
+import os, sys
+path, k, samples = sys.argv[1], 65536, 16
+size = os.path.getsize(path)
+if size < k * samples:
+    sys.exit(1)
+zero = bytes(k)
+with open(path, "rb") as f:
+    for i in range(1, samples + 1):
+        f.seek(size * i // (samples + 1))
+        if f.read(k) == zero:
+            sys.exit(0)
+sys.exit(1)
+' "$1"
+}
+
 probe_file() {
   local f="$1" start last
   REASON=""
+  if has_hole "$f"; then
+    DUR=0; REASON="download has gaps (unfinished pieces)"; return
+  fi
   DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f" 2>/dev/null </dev/null) || true
   case "$DUR" in ''|N/A) DUR=0; REASON="no readable video header"; return ;; esac
   start=$(awk -v d="$DUR" 'BEGIN { s = d - 5; printf "%d", (s < 0 ? 0 : s) }')

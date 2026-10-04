@@ -52,6 +52,7 @@ _NXNN = re.compile(r"\b(?P<season>\d{1,2})x(?P<ep>\d{2,3})\b", re.IGNORECASE)
 # "Robotboy 101 Dog Ra": season digit + two-digit episode. Only trusted when a
 # folder names the same season, so "Pitch Perfect 2" or "Area 51" never match.
 _NNN = re.compile(r"(?<![\d.])\b(?P<season>[1-9])(?P<ep>\d{2})\b(?![\d.])")
+_DASHED_EP = re.compile(r"\s-\s*E(?:p\.?)?\s*(?P<ep>\d{1,3})\s*-\s", re.IGNORECASE)
 _EP_ONLY = re.compile(r"\b(?:Ep(?:isode)?)\.?\s*(?P<ep>\d{1,3})\b", re.IGNORECASE)
 
 # Season named by a folder: "Season 3", "Season Two (2000)", "Book 1; Water", "S02".
@@ -151,6 +152,11 @@ def _find_episode(
     if m and _season_from_folders(folders) == int(m.group("season")):
         label = f"E{int(m.group('ep')):02d}"
         return int(m.group("season")), label, text[: m.start()], text[m.end():]
+    # "Series - E03 - Title (1942)": numbered shorts in a collection. Set off by
+    # dashes, the number is unambiguous even with a year in the name.
+    m = _DASHED_EP.search(text)
+    if m:
+        return None, f"E{int(m.group('ep')):02d}", text[: m.start()], text[m.end():]
     # A bare "Ep. 01" names an episode only when there's no year about: a
     # film like "Star Wars Episode 4 (1977)" is still a film.
     m = _EP_ONLY.search(text)
