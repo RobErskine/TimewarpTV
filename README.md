@@ -2,6 +2,8 @@
 
 **Turn a Raspberry Pi into a retro TV for your kids.**
 
+[![Watch TimewarpTV in action on YouTube: the Time Warp TV channel guide on a monitor, next to the Raspberry Pi in its orange 3D-printed case](docs/screenshots/video-thumbnail.jpg)](https://youtu.be/BpCKqrgoNqk)
+
 *Built on [NostalgiaBox](https://github.com/landonbtw/NostalgiaBox) — see [Credits](#credits).*
 
 TimewarpTV plays a library of old shows and films from a USB drive as if they
