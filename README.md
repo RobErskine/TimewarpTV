@@ -1,19 +1,20 @@
 # TimewarpTV
 
-**Turn a Raspberry Pi into a retro TV for your kids.**
+I built Time Warp TV: an offline, retro media player where everything plays on always-on channels. No menus, no doomscrolling, just channel surfing like it's 1997. Channel 1 is the guide, Channel 2 is baby stuff (Wee Sing, Bear in the Big Blue House), Channel 5 is kid prime time (SpongeBob, Ninjago), and the channels grow up as you climb. [Full demo in the video below (goes to YouTube)](https://youtu.be/BpCKqrgoNqk)
 
 [![Watch TimewarpTV in action on YouTube: the Time Warp TV channel guide on a monitor, next to the Raspberry Pi in its orange 3D-printed case](docs/screenshots/video-thumbnail.jpg)](https://youtu.be/BpCKqrgoNqk)
 
-*Built on [NostalgiaBox](https://github.com/landonbtw/NostalgiaBox) — see [Credits](#credits).*
+*Built on [NostalgiaBox](https://github.com/landonbtw/NostalgiaBox). See [Credits](#credits).*
 
-TimewarpTV plays a library of old shows and films from a USB drive as if they
-were real TV **channels**. Flip to a channel and something is already playing,
-a few seconds in, like you just tuned in. When an episode ends the next one
-rolls on an endless shuffle; movie channels pick up where you left off. It boots
-straight to the TV on power-up, runs from a simple remote, and has an
-early-2000s look: a green on-screen channel banner and volume bar, the Time
-Warp TV logo, captions for what's playing, and a curved "CRT" picture. No menus,
-no apps, no Wi-Fi needed. Just a remote and channels.
+TimewarpTV plays a library of shows and films off a USB drive like they're real
+TV **channels**. Flip to a channel and something is already playing, a few
+seconds in, like you just tuned in. Episode ends? The next one rolls on an
+endless shuffle. Movie channels pick up where you left off. It boots straight to
+the TV on power-up, runs off a simple remote, and looks like it fell out of the
+early 2000s: a green on-screen channel banner and volume bar, the Time Warp TV
+logo, captions for what's playing, and a curved "CRT" picture.
+
+No menus. No apps. No Wi-Fi needed. Just a remote and channels.
 
 ## What it looks like
 
@@ -23,34 +24,34 @@ no apps, no Wi-Fi needed. Just a remote and channels.
     <td width="50%"><img src="docs/screenshots/guide.png" alt="The channel-1 guide card: the Time Warp TV logo and wordmark over a green list of channels 1 to 10, with remote hints at the bottom"></td>
   </tr>
   <tr>
-    <td><b>Flip to a channel</b> — the channel banner, what's playing (show and episode, or film and year), and the curved "CRT" picture.</td>
-    <td><b>Channel 1, the guide</b> — every channel and how to work the remote, on a card the box draws itself.</td>
+    <td><b>Flip to a channel</b>: the channel banner, what's playing (show and episode, or film and year), and the curved "CRT" picture.</td>
+    <td><b>Channel 1, the guide</b>: every channel and how to work the remote, on a card the box draws itself.</td>
   </tr>
   <tr>
     <td><img src="docs/screenshots/volume.jpg" alt="The volume bar: solid green bars for the level, dots for the rest"></td>
     <td><img src="docs/screenshots/lock.jpg" alt="A locked channel's combination lock: four boxes, two digits entered as stars, the third showing 7 in solid green"></td>
   </tr>
   <tr>
-    <td><b>Volume</b> — the classic bar-and-dots readout.</td>
-    <td><b>Locked channels</b> — a combination lock you dial with ◀ ▶ and OK, no number pad needed.</td>
+    <td><b>Volume</b>: the classic bar-and-dots readout.</td>
+    <td><b>Locked channels</b>: a combination lock you dial with ◀ ▶ and OK, no number pad needed.</td>
   </tr>
   <tr>
     <td><img src="docs/screenshots/standby.png" alt="Standby: the Time Warp TV logo drifting on a black screen, the wordmark in the top-left corner"></td>
-    <td><b>Standby</b> — the logo drifts and bounces around the screen and the wordmark changes corner every minute, so nothing burns into the TV. The box goes here by itself after 10 minutes on a still screen.</td>
+    <td><b>Standby</b>: the logo drifts and bounces around the screen and the wordmark changes corner every minute, so nothing burns into the TV (burn-in is forever). The box goes here by itself after 10 minutes on a still screen.</td>
   </tr>
 </table>
 
-<sub>These are real frames from the player, overlays and all — regenerate them with
+<sub>These are real frames from the player, overlays and all. Regenerate them with
 `scripts/make-screenshots.py`. Footage: <i>Big Buck Bunny</i> © Blender Foundation,
 <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>,
 <a href="https://peach.blender.org/">peach.blender.org</a>.</sub>
 
 ## Contents
 
-0. [Try it on your computer first](#0-try-it-on-your-computer-first) — no Pi needed
+0. [Try it on your computer first](#0-try-it-on-your-computer-first), no Pi needed
 1. [What you'll need](#1-what-youll-need)
-2. [Setting it up](#2-setting-it-up) — the media drive, the SD card, the remote, the install
-3. [Using it](#3-using-it) — the remote, adding shows, updating
+2. [Setting it up](#2-setting-it-up): the media drive, the SD card, the remote, the install
+3. [Using it](#3-using-it): the remote, adding shows, updating
 4. [Configuration](#4-configuration)
 5. [Troubleshooting](#5-troubleshooting)
 6. [How it works](#6-how-it-works)
@@ -59,10 +60,10 @@ no apps, no Wi-Fi needed. Just a remote and channels.
 
 ## 0. Try it on your computer first
 
-You can run the real thing — real mpv playback, in a window — on a Mac or Linux
-machine, against a fake library generated in about a minute. It's the quickest
-way to see channel changes, the lock, resume and break blocks before touching a
-Pi.
+Before you buy a single part: you can run the real thing (real mpv playback, in
+a window) on a Mac or Linux machine against a fake library that builds itself
+in about a minute. Quickest way to see channel changes, the lock, resume and
+break blocks without touching a Pi.
 
 ```bash
 git clone https://github.com/RobErskine/TimewarpTV.git && cd TimewarpTV
@@ -73,7 +74,7 @@ pip install -e ".[dev,desktop]"
 timewarptv --config config.dev.yaml --windowed
 ```
 
-Drive it with your keyboard. Keys work in **either** window — the video or the
+Drive it with your keyboard. Keys work in **either** window, the video or the
 terminal you started it from:
 
 | Key | Does |
@@ -89,11 +90,11 @@ terminal you started it from:
 | p | Standby |
 | q / Ctrl-C | Quit |
 
-Every fake clip is 20 seconds long with its channel and show burned into the
-picture, so a shuffle, a break block (every 2 episodes here) and a resume (tune
-away from a movie channel and back) all show up within a minute. Add
-`--with-bunny` to also download one real feature-length film; `--force`
-regenerates everything.
+Every fake clip is 20 seconds of its own channel and show burned into the
+picture (riveting television), so a shuffle, a break block (every 2 episodes
+here) and a resume (tune away from a movie channel and back) all show up within
+a minute. Add `--with-bunny` to also download one real feature-length film;
+`--force` regenerates everything.
 
 ---
 
@@ -103,10 +104,10 @@ regenerates everything.
 |------|-------|
 | **Raspberry Pi 3 Model B** | What TimewarpTV is built and tested on. A Pi 4 or 5 works too (they use a micro-HDMI cable). |
 | **Power supply** | The official Pi 3 supply (5.1 V, 2.5 A, micro-USB). A weaker phone charger causes under-voltage resets. |
-| **micro-SD card, 32 GB** | Holds the operating system only — the videos live on the drive. |
+| **micro-SD card, 32 GB** | Holds the operating system only; the videos live on the drive. |
 | **USB drive for the library** | Formatted **exFAT**. For scale: 2,800 episodes and films of mostly standard-definition TV take about 430 GB. |
 | **Powered USB hub** *(recommended)* | A Pi 3 struggles to power a USB hard drive by itself; a hub supplies it instead. |
-| **[Flirc USB receiver](https://flirc.tv/products/flirc-usb-receiver)** | Lets an IR remote control the Pi — it turns button presses into keystrokes. |
+| **[Flirc USB receiver](https://flirc.tv/products/flirc-usb-receiver)** | Lets an IR remote control the Pi by turning button presses into keystrokes. |
 | **[Argon IR Remote](https://argon40.com/products/argon-remote)** | The remote the button layout below is written for. Any IR remote works with the Flirc. |
 | **HDMI cable** | Full-size HDMI for a Pi 3. |
 | **A TV with HDMI** | Its own remote can control the box too, over HDMI-CEC, if the TV supports it. |
@@ -116,15 +117,15 @@ regenerates everything.
 
 ## 2. Setting it up
 
-Parts A–C are on your **computer**; D–H are on the Pi, over the network.
+Parts A-C are on your **computer**; D-H are on the Pi, over the network.
 
-### Part A — Build the media drive
+### Part A: Build the media drive
 
-The box reads everything from one USB drive: a folder per channel, plus a
-`config.yaml` that names the channels.
+Everything the box knows lives on one USB drive: a folder per channel, plus a
+`config.yaml` that names them. That's the whole database.
 
 1. **Format the drive exFAT** (readable and writable by Mac, PC and Pi) and name
-   it **`WARPMEDIA`** — the box finds it by that name. On a Mac: Disk Utility →
+   it **`WARPMEDIA`**, since that's the name the box looks for. On a Mac: Disk Utility →
    Erase → Format *ExFAT*, Name *WARPMEDIA*.
 2. **Fill the channel folders.** One folder per channel at the top of the drive,
    numbered so they sort in channel order. Shows go inside, season folders and
@@ -144,8 +145,8 @@ The box reads everything from one USB drive: a folder per channel, plus a
    └── breaks/                    (optional: commercials, bathroom-break cards)
    ```
 
-   Drag shows in by hand, or — if your library is a Plex-style folder of
-   `TV Shows/` and `Movies/` — let **`scripts/build-library.sh`** do it. List
+   Drag shows in by hand, or, if your library is a Plex-style folder of
+   `TV Shows/` and `Movies/`, let **`scripts/build-library.sh`** do it. List
    which channel each show belongs on in a manifest (start from
    [`scripts/library.example.tsv`](scripts/library.example.tsv), saved as
    `scripts/library.tsv`), then:
@@ -161,7 +162,7 @@ The box reads everything from one USB drive: a folder per channel, plus a
    Re-running it only copies what's new. It insists every show in the source is
    either listed or marked `SKIP`, so nothing gets left off by accident.
 
-   Plex-style names — `Title (1999).mp4`, `Show S01E05 Title.mkv` — also give
+   Plex-style names (`Title (1999).mp4`, `Show S01E05 Title.mkv`) also give
    the best on-screen captions.
 
 3. **Write `config.yaml`** in the root of the drive. Start from
@@ -169,32 +170,34 @@ The box reads everything from one USB drive: a folder per channel, plus a
    number, name and folder, and explains every other setting. Folder paths are
    relative to the config, so a channel is just `path: 05-kids`.
 
-### Part B — Flash the SD card
+### Part B: Flash the SD card
 
 1. Install **[Raspberry Pi Imager](https://www.raspberrypi.com/software/)**.
 2. **Unplug the media drive first.** Imager's Storage step lists every external
-   disk, and erasing the library by mistake is easy.
+   disk, and erasing the library you just finished copying is a two-click
+   mistake.
 3. Insert the micro-SD card. (If it's in a full-size adapter, slide the lock
    switch up.)
 4. In Imager:
    - **Device:** Raspberry Pi 3.
    - **OS:** scroll past the first entries (they include a desktop) to
      **Raspberry Pi OS (other) → Raspberry Pi OS Lite (64-bit)**.
-   - **Storage:** the SD card — check the size (a "32 GB" card shows as 31.9 GB).
+   - **Storage:** the SD card, and check the size (a "32 GB" card shows as 31.9 GB).
    - **Customisation:**
      - **Hostname:** `warptv`
      - **Localisation:** your time zone and keyboard layout
-     - **User:** a username and password — write them down
+     - **User:** a username and password (write them down)
      - **Wi-Fi:** network, password and **country**. A Pi 3 Model B only does
-       **2.4 GHz**, so pick a 2.4 GHz network — or use Ethernet. (The box itself
+       **2.4 GHz**, so pick a 2.4 GHz network, or use Ethernet. (The box itself
        never needs a network; this is just for installing.)
      - **Remote access:** turn on **SSH**, with password authentication
 5. Write it, let it verify, and eject.
 
-### Part C — Program the remote (Flirc)
+### Part C: Program the remote (Flirc)
 
-The Flirc learns each button on your remote and replays it as a keystroke. Do
-this on your **computer**:
+The Flirc is the magic trick here: it learns each button on your remote and
+replays it as a keystroke, so the Pi just thinks somebody's typing. Do this on
+your **computer**:
 
 1. Plug the Flirc into your computer.
 
@@ -222,7 +225,7 @@ this on your **computer**:
    | **Power** | `p` | Standby |
 
    Why `,` and `.` for ◀ ▶ instead of the arrow keys? Left/right arrows are
-   volume for everything else — including a TV's own remote over HDMI-CEC — so
+   volume for everything else, including a TV's own remote over HDMI-CEC, so
    the Flirc gets its own keys for skipping.
 
 5. **Test it in a blank text document.** ◀ ▶ Vol+ Vol− ☰ Power should type
@@ -231,11 +234,11 @@ this on your **computer**:
    button, and record it again.
 6. Optional: **File → Save Configuration** keeps a backup of the mapping.
 
-The mapping is stored on the Flirc itself. You can unplug it and replug it
-into the Pi at any time, even while the TV is on — it's picked up within a
-couple of seconds.
+The mapping lives on the Flirc itself, which is great: unplug it and replug it
+into the Pi whenever you want, even while the TV is on, and it's picked up
+within a couple of seconds.
 
-### Part D — Plug it in and connect
+### Part D: Plug it in and connect
 
 1. Plug the **Flirc** and the **media drive** (through the powered hub, if you
    have one) into the Pi.
@@ -251,7 +254,7 @@ couple of seconds.
    If `warptv.local` isn't found, use the Pi's IP address from your router
    instead.
 
-### Part E — Install TimewarpTV
+### Part E: Install TimewarpTV
 
 ```bash
 sudo apt update && sudo apt install -y git
@@ -262,18 +265,18 @@ cd ~/TimewarpTV
 
 This installs the player (mpv), the video tools (ffmpeg), HDMI-CEC support and
 everything else, generates the static and colour-bar clips, and adds the
-`timewarptv` command. It takes **10–20 minutes on a Pi 3**, and finishes with
-**"==> Done!"**.
+`timewarptv` command. It takes **10-20 minutes on a Pi 3** (go make a coffee)
+and finishes with **"==> Done!"**.
 
-### Part F — Make it an appliance
+### Part F: Make it an appliance
 
 ```bash
 ./scripts/install-service.sh
 ```
 
-This turns the Pi into a TV that runs itself:
+This is the part that turns a Raspberry Pi into an appliance:
 
-- It mounts the drive by its **label** (`WARPMEDIA`) — at boot, and whenever
+- It mounts the drive by its **label** (`WARPMEDIA`) at boot, and whenever
   it's plugged in later.
 - It starts TimewarpTV on power-up, straight to the screen: no login, no menus,
   no network.
@@ -289,7 +292,7 @@ timewarptv --check
 
 This lists every channel and how many episodes it found in each.
 
-From now on, the box copes with whatever state it's plugged in in:
+From now on the box copes with whatever state it gets plugged in in:
 
 | Situation | What happens |
 |---|---|
@@ -298,11 +301,11 @@ From now on, the box copes with whatever state it's plugged in in:
 | Drive pulled out while it's on | Goes back to *CONNECT THE MEDIA DRIVE* |
 | Drive plugged back in | Mounts it, **re-scans everything**, and carries on |
 | `config.yaml` edited | Restarts itself within a few seconds with the new channels |
-| New room, house or TV | Nothing to do — it never needs a network |
+| New room, house or TV | Nothing to do; it never needs a network |
 
 (Different label or mount point? `./scripts/install-service.sh /mount/path LABEL`.)
 
-### Part G — Finishing touches
+### Part G: Finishing touches
 
 **The guide card.** Channel 1 is a still card listing every channel, drawn from
 your config:
@@ -312,7 +315,7 @@ timewarptv --make-guide
 ```
 
 It takes about two minutes on a Pi 3 and writes `01-guide/welcome.mp4` on the
-drive. Re-run it whenever you add or rename a channel — it's a picture, so it
+drive. Re-run it whenever you add or rename a channel, since it's a picture and
 won't update by itself. Set the station name with `ui.brand` (it shows the logo
 and wordmark by default).
 
@@ -331,27 +334,30 @@ audio_device: "alsa/default:CARD=vc4hdmi"   # HDMI on a Pi 3
 
 Saving the file restarts the TV with the change.
 
-**Make the TV come on to the box.** Most smart TVs open their own home screen
-when switched on. Set them to start on the Pi's HDMI port instead — on a Vizio:
+**Make the TV come on to the box.** Most smart TVs insist on opening their own
+home screen when you switch them on. Set yours to start on the Pi's HDMI port
+instead and the illusion holds. On a Vizio:
 **Menu → System → Input at Power On →** *the Pi's HDMI port*. You can still
 change input by hand any time.
 
-### Part H — Make it kid-proof
+### Part H: Make it kid-proof
 
-Kids will pull the plug. Two things keep the SD card from getting corrupted:
+Kids will pull the plug. Not *might*. Will. Two things keep that from
+corrupting the SD card:
 
 - **Turn it off with the remote.** Turn the volume down to 0, let go, then press
   Vol − **once more**: the TV says GOODBYE and the Pi shuts down cleanly. It's
   safe to unplug once the green light stops blinking. (Holding Vol − stops at 0
   on purpose, so it can't happen by accident.) Plug it back in to turn it on.
-- **Read-only mode — do this last, once everything works.** `sudo raspi-config`
+- **Read-only mode (do this last, once everything works).** `sudo raspi-config`
   → **Performance Options → Overlay File System → Enable** (and write-protect the
   boot partition), then reboot. The SD card becomes read-only, so pulling the
   plug can never corrupt it. Nothing is lost: the channel list and resume
   positions live on the drive, which stays writable. To update later, turn the
   overlay off the same way, reboot, update, and turn it back on.
 
-**Done!** Plug it in and enjoy TimewarpTV.
+**Done!** Plug it in, hand over the remote, and let somebody find out that
+channel 5 exists.
 
 ---
 
@@ -364,12 +370,12 @@ Kids will pull the plug. Two things keep the SD card from getting corrupted:
 | Change channel | ▲ / ▼ |
 | Something else on this channel | ▶ (next) / ◀ (back to the one before) |
 | Volume | Vol + / Vol − |
-| See what's playing | ☰ — the show and episode (or film and year) appear bottom-right |
+| See what's playing | ☰ (the show and episode, or film and year, appear bottom-right) |
 | Back to the guide | Home |
 | Back to the last channel | Back |
 | Unlock a locked channel | ◀ / ▶ to choose each digit, OK for the next |
-| Start a resumed film over | OK while "RESUMING – PRESS OK TO START OVER" shows |
-| Standby | Power — the logo drifts around, so nothing burns into the TV |
+| Start a resumed film over | OK while "RESUMING - PRESS OK TO START OVER" shows |
+| Standby | Power (the logo drifts around, so nothing burns into the TV) |
 | **Turn off** (safe to unplug) | At volume 0, let go, then Vol − once more |
 
 A few behaviours worth knowing:
@@ -377,22 +383,22 @@ A few behaviours worth knowing:
 - **Skipping** works like shuffle on a music player: ▶ draws something new, ◀
   goes back, and ▶ after that steps forward again. Holding a button skips once.
   Skips never trigger a break.
-- **Locked channels** stay unlocked only while you're on them. Change channel,
-  or go to standby, and they lock again. With the Argon remote, `1997` is
+- **Locked channels** stay unlocked only while you're on them. Change channel or
+  go to standby and they lock right back up. With the Argon remote, `1997` is
   ▶ OK, ◀ OK, ◀ OK, ◀◀◀ OK. The TV's own remote (over HDMI-CEC) or a keyboard
   can type digits directly.
-- **The burn-in guard.** After 10 minutes on a still screen — the guide, a lock
-  screen, or a channel with nothing on it — with no button pressed, the box goes
+- **The burn-in guard.** After 10 minutes on a still screen (the guide, a lock
+  screen, or a channel with nothing on it) with no button pressed, the box goes
   to standby by itself. Shows and films never trigger it.
 - **HD films** play without the CRT curve; it comes back for the next older show.
 
 ### Adding shows
 
-No terminal needed:
+No terminal, no SSH, no nothing:
 
 1. Unplug the drive from the Pi (the Pi can stay on; it shows *CONNECT THE MEDIA
    DRIVE*).
-2. Plug it into your computer and add episodes to the channel folders — drag
+2. Plug it into your computer and add episodes to the channel folders: drag
    them in, or re-run `./scripts/build-library.sh`.
 3. Eject it properly and plug it back into the Pi. It mounts and re-scans by
    itself.
@@ -417,8 +423,8 @@ on.)
 ## 4. Configuration
 
 Everything lives in `config.yaml` on the drive.
-[`config.example.yaml`](config.example.yaml) documents every setting; these are
-the ones you're most likely to touch. Check your changes with
+[`config.example.yaml`](config.example.yaml) documents every setting, but these
+are the ones you'll actually touch. Check your changes with
 `timewarptv --check`.
 
 ```yaml
@@ -463,9 +469,9 @@ channels:
 
 ### Break blocks
 
-Old commercials, station bumpers or your own "BATHROOM BREAK" / "SNACK TIME"
-cards — just video files in a folder — can play between episodes. They never
-interrupt a show; a break only comes when an episode ends.
+Old commercials, station bumpers, or your own "BATHROOM BREAK" / "SNACK TIME"
+cards (just video files in a folder) can play between episodes. They never
+interrupt a show; a break only ever comes when an episode ends.
 
 ```yaml
 breaks:
@@ -480,7 +486,9 @@ Turn breaks off for one channel with `breaks: false` on that channel.
 
 ## 5. Troubleshooting
 
-Logs: `journalctl -u timewarptv -f` (follow live) or `journalctl -u timewarptv -b` (this boot).
+When something's off, the logs usually tell you why first:
+`journalctl -u timewarptv -f` (follow live) or `journalctl -u timewarptv -b`
+(this boot).
 
 - **The TV opens its own home screen, not the box.** Set the TV's power-on input
   to the Pi's HDMI port (Part G).
@@ -493,26 +501,26 @@ Logs: `journalctl -u timewarptv -f` (follow live) or `journalctl -u timewarptv -
 - **CONNECT THE MEDIA DRIVE won't go away.** The drive must be named `WARPMEDIA`
   and formatted exFAT. `lsblk -f` on the Pi shows what it sees.
 - **The remote does nothing.** Test the Flirc in a text document on your
-  computer (Part C, step 5). A remote that worked before and stopped is usually
-  the Flirc not being fully pushed in.
+  computer (Part C, step 5). A remote that worked before and quit is almost
+  always the Flirc not being pushed all the way in.
 - **Can't get past the first digit on a lock screen.** The OK button isn't
-  mapped — teach it **Enter** in the Flirc app (Part C).
+  mapped. Teach it **Enter** in the Flirc app (Part C).
 - **The Pi resets, or the drive disconnects.** Usually not enough power: use the
   official supply and a powered USB hub. `vcgencmd get_throttled` on the Pi
   reports anything other than `throttled=0x0` if it has happened.
 - **A 1080p film stutters.** Add `hwdec: "no"` to `config.yaml`.
 - **It won't boot after a power cut.** The SD card was corrupted by an unclean
-  shutdown. Re-flash it (Parts B, E and F — the drive is untouched), then turn
+  shutdown. Re-flash it (Parts B, E and F; the drive is untouched), then turn
   on read-only mode (Part H).
 
 ---
 
 ## 6. How it works
 
-Plain Python. The logic — channel scanning, the shuffle, the TV state machine —
-has no hardware dependencies and is covered by tests; the video player and the
-remote input sit behind small interfaces. You can drive the whole thing on a
-laptop with a mock player and no video:
+Plain Python, no magic. The logic (channel scanning, the shuffle, the TV state
+machine) has zero hardware dependencies and is covered by tests; the video
+player and the remote input sit behind small interfaces. Which means you can
+drive the whole thing on a laptop with a mock player and no video at all:
 
 ```bash
 pip install -e ".[dev]"
@@ -546,11 +554,12 @@ replace them and every screen picks up the new art.
 
 ## Credits
 
-TimewarpTV began as a fork of **[NostalgiaBox](https://github.com/landonbtw/NostalgiaBox)**
-by [landonbtw](https://github.com/landonbtw) — the retro-TV player for a
-Raspberry Pi that it's built on: the channels, the shuffle, the channel banner
-and volume bar, the CRT look. Thank you.
+TimewarpTV started life as a fork of **[NostalgiaBox](https://github.com/landonbtw/NostalgiaBox)**
+by [landonbtw](https://github.com/landonbtw), and the good bones are all theirs:
+the channels, the shuffle, the channel banner and volume bar, that CRT look. I
+got to stand on a working retro TV and tinker instead of starting from a blank
+file. Thank you, truly.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
