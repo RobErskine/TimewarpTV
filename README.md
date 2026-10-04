@@ -519,7 +519,7 @@ timewarptv --dry-run --config config.dev.yaml   # keyboard-controlled, no video
 ```
 
 ```
-nostalgiabox/           the Python package (see Credits for the name)
+timewarptv/             the Python package
 ├── app.py         the TV state machine
 ├── config.py      YAML -> validated config
 ├── channel.py     folder scanning, tune-in modes, skip history, locks, breaks
@@ -537,7 +537,7 @@ nostalgiabox/           the Python package (see Credits for the name)
 └── input/         remote input: Flirc/keyboard, HDMI-CEC, key map
 ```
 
-The logo and wordmark are `nostalgiabox/assets/logo.svg` and `wordmark.svg`;
+The logo and wordmark are `timewarptv/assets/logo.svg` and `wordmark.svg`;
 replace them and every screen picks up the new art.
 
 ---
@@ -549,10 +549,10 @@ by [landonbtw](https://github.com/landonbtw) — the retro-TV player for a
 Raspberry Pi that it's built on: the channels, the shuffle, the channel banner
 and volume bar, the CRT look. Thank you.
 
-The original name survives only in a few technical identifiers that an installed
-box depends on: the Python package and its folder (`nostalgiabox/`), the
-`nostalgiabox` service, and the `/media/nostalgiabox` mount point. The old
-`nostalgiabox` command also still works, as an alias of `timewarptv`.
+The original name survives only in two system-level names an installed box
+depends on: the `nostalgiabox` service and the `/media/nostalgiabox` mount
+point. (The old `nostalgiabox` command also still works, as an alias of
+`timewarptv`, so older installs keep running.)
 
 ## License
 

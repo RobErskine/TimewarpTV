@@ -31,8 +31,8 @@ RUN_UID="$(id -u "${RUN_USER}")"
 RUN_GID="$(id -g "${RUN_USER}")"
 RUN_HOME="$(getent passwd "${RUN_USER}" | cut -d: -f6)"
 
-if [[ ! -x "${REPO_DIR}/.venv/bin/nostalgiabox" ]]; then
-  echo "error: ${REPO_DIR}/.venv/bin/nostalgiabox not found." >&2
+if [[ ! -x "${REPO_DIR}/.venv/bin/timewarptv" ]]; then
+  echo "error: ${REPO_DIR}/.venv/bin/timewarptv not found." >&2
   echo "Run ./scripts/install.sh first." >&2
   exit 1
 fi

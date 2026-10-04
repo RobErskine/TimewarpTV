@@ -1,6 +1,6 @@
 import random
 
-from nostalgiabox.channel import (
+from timewarptv.channel import (
     BroadcastSchedule,
     Channel,
     ChannelLineup,
@@ -8,7 +8,7 @@ from nostalgiabox.channel import (
     detect_season,
     scan_episodes,
 )
-from nostalgiabox.config import BreaksConfig, ChannelConfig, config_from_dict
+from timewarptv.config import BreaksConfig, ChannelConfig, config_from_dict
 from tests.helpers import make_show
 
 
@@ -135,7 +135,7 @@ def test_resume_mode_remembers_position(tmp_path):
 def test_empty_channel_returns_none(tmp_path):
     folder = tmp_path / "empty"
     folder.mkdir()
-    from nostalgiabox.config import ChannelConfig
+    from timewarptv.config import ChannelConfig
 
     ch = Channel(ChannelConfig(number=9, name="Empty", path=folder), [])
     assert ch.is_empty
@@ -160,7 +160,7 @@ def test_broadcast_schedule_positions():
 
 def test_broadcast_tune_in_uses_real_time(tmp_path, monkeypatch):
     # Force probe_duration to a known value so we don't need ffprobe/real media.
-    import nostalgiabox.channel as channel_mod
+    import timewarptv.channel as channel_mod
 
     monkeypatch.setattr(channel_mod, "probe_duration", lambda p: 60.0)
     ch = _channel(tmp_path, episodes=3, tune_in="broadcast")
@@ -398,7 +398,7 @@ def test_no_breaks_configured_never_fires(tmp_path):
 
 
 def test_breaks_disabled_via_effective_breaks(tmp_path):
-    from nostalgiabox.channel import _effective_breaks
+    from timewarptv.channel import _effective_breaks
 
     breaks_cfg = BreaksConfig(path=tmp_path, every=1)
     disabled_ch_cfg = ChannelConfig(
@@ -550,7 +550,7 @@ def test_skip_past_a_resumed_film_draws_something_else(tmp_path):
 
 
 def test_history_is_bounded(tmp_path):
-    from nostalgiabox.channel import _HISTORY_LIMIT
+    from timewarptv.channel import _HISTORY_LIMIT
 
     ch = _channel(tmp_path, episodes=4)
     ch.tune_in()

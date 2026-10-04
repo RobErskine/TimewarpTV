@@ -16,8 +16,8 @@ from queue import Empty, Queue
 
 import pytest
 
-from nostalgiabox.actions import Action
-from nostalgiabox.input.stdin_backend import StdinBackend
+from timewarptv.actions import Action
+from timewarptv.input.stdin_backend import StdinBackend
 
 pytestmark = pytest.mark.skipif(
     sys.platform.startswith("win"), reason="needs a POSIX pty"

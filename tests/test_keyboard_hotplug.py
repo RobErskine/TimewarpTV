@@ -12,8 +12,8 @@ from queue import Empty, Queue
 
 import pytest
 
-import nostalgiabox.input.keyboard as keyboard
-from nostalgiabox.actions import Action
+import timewarptv.input.keyboard as keyboard
+from timewarptv.actions import Action
 
 EV_KEY, KEY_ENTER, KEY_UP = 1, 28, 103
 

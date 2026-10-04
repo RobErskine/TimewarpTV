@@ -1,6 +1,6 @@
 # 0003: Try HDMI-CEC before buying a Flirc
 
-**Decision:** Recommend testing the existing HDMI-CEC input backend (`nostalgiabox/input/cec.py`,
+**Decision:** Recommend testing the existing HDMI-CEC input backend (`timewarptv/input/cec.py`,
 already implemented, needs only `cec-utils` installed) with the in-laws' TV remote before buying a
 Flirc USB receiver for the Argon IR remote.
 

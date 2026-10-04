@@ -32,7 +32,7 @@ if [[ ! -f "$MANIFEST" ]]; then
   exit 1
 fi
 
-# Must match DEFAULT_VIDEO_EXTENSIONS in nostalgiabox/config.py.
+# Must match DEFAULT_VIDEO_EXTENSIONS in timewarptv/config.py.
 VIDEO_EXTS="mp4 mkv avi m4v mov webm mpg mpeg ts"
 
 DRY_RUN=0

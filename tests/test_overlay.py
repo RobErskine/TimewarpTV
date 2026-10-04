@@ -1,10 +1,10 @@
 import re
 
-from nostalgiabox.config import config_from_dict
+from timewarptv.config import config_from_dict
 import pytest
 
-from nostalgiabox.overlay import OverlayManager
-from nostalgiabox.player import MockPlayer
+from timewarptv.overlay import OverlayManager
+from timewarptv.player import MockPlayer
 from tests.helpers import FakeClock, make_show
 
 # The 4:3 frame within the 1280x720 canvas spans x in [160, 1120].
@@ -134,13 +134,13 @@ def test_overlay_uses_configured_font_and_color(tmp_path):
 
 
 def _ui_with_logo(on):
-    from nostalgiabox.config import UiConfig
+    from timewarptv.config import UiConfig
 
     return UiConfig(logo=on)
 
 
 def test_logo_rides_on_the_channel_banner():
-    from nostalgiabox.overlay import _channel_bug_ass
+    from timewarptv.overlay import _channel_bug_ass
 
     with_logo = _channel_bug_ass(4, "Kids", _ui_with_logo(True))
     without = _channel_bug_ass(4, "Kids", _ui_with_logo(False))
@@ -151,7 +151,7 @@ def test_logo_rides_on_the_channel_banner():
 
 
 def test_logo_rides_on_the_volume_bar():
-    from nostalgiabox.overlay import _volume_ass
+    from timewarptv.overlay import _volume_ass
 
     with_logo = _volume_ass(45, False, _ui_with_logo(True))
     without = _volume_ass(45, False, _ui_with_logo(False))
@@ -163,7 +163,7 @@ def test_logo_rides_on_the_volume_bar():
 
 
 def _logo_lines(on):
-    from nostalgiabox.overlay import _logo_ass
+    from timewarptv.overlay import _logo_ass
 
     return _logo_ass(_ui_with_logo(on))
 
@@ -178,19 +178,19 @@ def test_logo_is_the_svg_artwork():
 
 def test_logo_sits_clear_of_the_volume_bar():
     """The mark must not overlap the bar it shares the bottom of the screen with."""
-    from nostalgiabox.overlay import _BAR_ROW_TOP, _LOGO_BOTTOM
+    from timewarptv.overlay import _BAR_ROW_TOP, _LOGO_BOTTOM
 
     assert _LOGO_BOTTOM < _BAR_ROW_TOP
 
 
 def test_logo_stays_inside_the_safe_area():
-    from nostalgiabox.overlay import _IX1, _LOGO_RIGHT
+    from timewarptv.overlay import _IX1, _LOGO_RIGHT
 
     assert _LOGO_RIGHT <= _IX1
 
 
 # -- welcome / channel-guide card -------------------------------------------
-# Rendered once into channel 1's episode by nostalgiabox.guide_gen, so a
+# Rendered once into channel 1's episode by timewarptv.guide_gen, so a
 # mistake here ships as a wrong picture on the TV rather than a crash.
 
 
@@ -202,8 +202,8 @@ class _Ch:
 
 
 def test_guide_lists_every_channel():
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import guide_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import guide_ass
 
     channels = [_Ch(1, "Guide"), _Ch(2, "Playhouse"), _Ch(10, "Movies")]
     ass = guide_ass(channels, UiConfig())
@@ -213,8 +213,8 @@ def test_guide_lists_every_channel():
 
 
 def test_guide_marks_only_locked_channels():
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import guide_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import guide_ass
 
     ass = guide_ass(
         [_Ch(2, "Playhouse"), _Ch(9, "Adult Swim", passcode="1997")], UiConfig()
@@ -224,8 +224,8 @@ def test_guide_marks_only_locked_channels():
 
 
 def test_guide_header_is_the_logo_and_wordmark():
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import guide_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import guide_ass
 
     ass = guide_ass([_Ch(1, "Guide")], UiConfig())
     header = [line for line in ass.split("\n") if r"\p1" in line]
@@ -235,8 +235,8 @@ def test_guide_header_is_the_logo_and_wordmark():
 
 
 def test_a_custom_station_name_is_typed_instead():
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import guide_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import guide_ass
 
     ass = guide_ass([_Ch(1, "Guide")], UiConfig(brand="KID TV"))
 
@@ -248,8 +248,8 @@ def test_guide_rows_stay_inside_the_safe_area():
     """A long line-up must shrink to fit, not run off the bottom of the screen."""
     import re
 
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import _GUIDE_ROWS_BOTTOM, guide_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import _GUIDE_ROWS_BOTTOM, guide_ass
 
     channels = [_Ch(n, f"Channel {n}") for n in range(1, 21)]
     ass = guide_ass(channels, UiConfig())
@@ -262,8 +262,8 @@ def test_guide_rows_stay_inside_the_safe_area():
 
 
 def test_guide_hint_becomes_one_multi_line_block():
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import guide_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import guide_ass
 
     ass = guide_ass([_Ch(1, "Guide")], UiConfig(), hint="first\nsecond")
 
@@ -271,8 +271,8 @@ def test_guide_hint_becomes_one_multi_line_block():
 
 
 def test_guide_escapes_channel_names():
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import guide_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import guide_ass
 
     ass = guide_ass([_Ch(1, "Odd {name}")], UiConfig())
 
@@ -285,8 +285,8 @@ def test_multi_line_message_is_one_styled_event():
     A real newline reaching mpv starts a new, unstyled osd-overlay event, so
     the lock screen's second and third lines landed top-left in plain white.
     """
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import _message_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import _message_ass
 
     ass = _message_ass("ADULT SWIM - LOCKED\nENTER CODE  [0] _ _ _\n< >  OK", UiConfig())
 
@@ -312,8 +312,8 @@ def _boxes(ass):
 
 
 def test_lock_screen_has_one_box_per_digit():
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import _lock_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import _lock_ass
 
     for length in (1, 4, 6, 8):
         ass = _lock_ass("LOCKED", UiConfig(), entered=0, dial=0, length=length)
@@ -322,8 +322,8 @@ def test_lock_screen_has_one_box_per_digit():
 
 def test_long_codes_still_fit_inside_the_panel():
     """Passcodes can be up to 8 digits; boxes narrow rather than overflow."""
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import _LOCK_PANEL_W, _LOCK_PANEL_X, _lock_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import _LOCK_PANEL_W, _LOCK_PANEL_X, _lock_ass
 
     ass = _lock_ass("LOCKED", UiConfig(), entered=3, dial=5, length=8)
     for x, w in _boxes(ass):
@@ -332,7 +332,7 @@ def test_long_codes_still_fit_inside_the_panel():
 
 def test_lock_panel_clears_the_banner_volume_bar_and_logo():
     """Vol +/- and the channel banner both appear over the lock screen."""
-    from nostalgiabox.overlay import (
+    from timewarptv.overlay import (
         _BAR_ROW_TOP, _IY0, _LOCK_PANEL_H, _LOCK_PANEL_Y, _LOGO_TOP,
     )
 
@@ -343,8 +343,8 @@ def test_lock_panel_clears_the_banner_volume_bar_and_logo():
 
 
 def test_lock_screen_masks_entered_digits_and_highlights_the_dial():
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import _lock_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import _lock_ass
 
     ass = _lock_ass("LOCKED", UiConfig(), entered=2, dial=7, length=4)
     lines = ass.split("\n")
@@ -354,8 +354,8 @@ def test_lock_screen_masks_entered_digits_and_highlights_the_dial():
 
 
 def test_status_replaces_the_help_line():
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import _lock_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import _lock_ass
 
     ass = _lock_ass("LOCKED", UiConfig(), entered=0, dial=0, length=4,
                     status="INCORRECT - TRY AGAIN")
@@ -366,8 +366,8 @@ def test_status_replaces_the_help_line():
 
 def test_text_glow_has_a_dark_edge_not_a_green_halo():
     """The old 4px blurred *green* border smeared text over bright video."""
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import _hex_to_ass, _style
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import _hex_to_ass, _style
 
     ui = UiConfig()
     tags = _style(ui, size=40)
@@ -380,8 +380,8 @@ def test_text_glow_has_a_dark_edge_not_a_green_halo():
 
 
 def _caption_lines(caption):
-    from nostalgiabox.config import UiConfig
-    from nostalgiabox.overlay import _caption_ass
+    from timewarptv.config import UiConfig
+    from timewarptv.overlay import _caption_ass
 
     return _caption_ass(caption, UiConfig())
 
@@ -389,8 +389,8 @@ def _caption_lines(caption):
 def test_caption_is_right_aligned_and_sits_on_the_logo():
     import re
 
-    from nostalgiabox.overlay import _IX1, _LOGO_TOP
-    from nostalgiabox.titles import NowPlaying
+    from timewarptv.overlay import _IX1, _LOGO_TOP
+    from timewarptv.titles import NowPlaying
 
     lines = _caption_lines(NowPlaying("Batman Beyond", "S03 E05  Out of the Past"))
 
@@ -404,14 +404,14 @@ def test_caption_is_right_aligned_and_sits_on_the_logo():
 
 
 def test_caption_without_a_detail_is_one_line():
-    from nostalgiabox.titles import NowPlaying
+    from timewarptv.titles import NowPlaying
 
     assert len(_caption_lines(NowPlaying("Wee Sing Together"))) == 1
 
 
 def test_caption_clears_the_volume_bar():
     """Vol +/- right after a channel change shows both at once."""
-    from nostalgiabox.overlay import _BAR_ROW_TOP, _LOGO_TOP
+    from timewarptv.overlay import _BAR_ROW_TOP, _LOGO_TOP
 
     assert _LOGO_TOP < _BAR_ROW_TOP - 62   # caption sits above the logo, so above "Volume"
 
@@ -423,7 +423,7 @@ class _CountingPlayer:
     """A MockPlayer that also counts how often each overlay is re-sent."""
 
     def __init__(self):
-        from nostalgiabox.player import MockPlayer
+        from timewarptv.player import MockPlayer
 
         self.inner = MockPlayer()
         self.sends = {}

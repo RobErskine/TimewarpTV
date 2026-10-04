@@ -37,7 +37,7 @@ Environment=HOME=__HOME__
 Environment=XDG_RUNTIME_DIR=/run/user/__UID__
 # The config lives on the media drive, so channels can be changed from any
 # computer the drive is plugged into - no terminal on the Pi needed.
-ExecStart=__REPO_DIR__/.venv/bin/nostalgiabox --config __MEDIA_PATH__/config.yaml --hotplug
+ExecStart=__REPO_DIR__/.venv/bin/timewarptv --config __MEDIA_PATH__/config.yaml --hotplug
 Restart=always
 RestartSec=3
 # Own the console so video can be shown on it.

@@ -1,5 +1,5 @@
-from nostalgiabox.config import CrtConfig
-from nostalgiabox.crt import render_shader, write_shader
+from timewarptv.config import CrtConfig
+from timewarptv.crt import render_shader, write_shader
 
 
 def test_shader_contains_baked_constants():

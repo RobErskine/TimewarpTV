@@ -7,7 +7,7 @@ import random
 
 import pytest
 
-from nostalgiabox.screensaver import CORNERS, Screensaver, bounce
+from timewarptv.screensaver import CORNERS, Screensaver, bounce
 from tests.helpers import FakeClock
 
 

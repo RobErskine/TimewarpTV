@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from nostalgiabox import brand
+from timewarptv import brand
 
 SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}"><path d="{d}" fill="#000"/></svg>"""
 

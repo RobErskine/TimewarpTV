@@ -20,8 +20,8 @@ scripts/library.tsv
 # Dev sandbox library + config (created by `scripts/make-dev-library.sh`).
 config.dev.yaml
 dev-media/
-# Generated filler clips (created by `nostalgiabox --generate-assets`).
-nostalgiabox/assets/*.mp4
+# Generated filler clips (created by `timewarptv --generate-assets`).
+timewarptv/assets/*.mp4
 
 # OS cruft
 .DS_Store

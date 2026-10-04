@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import os
 
-from nostalgiabox.media_watch import MediaWatch, wait_for_file
+from timewarptv.media_watch import MediaWatch, wait_for_file
 from tests.helpers import FakeClock
 
 

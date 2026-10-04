@@ -1,10 +1,10 @@
 import pytest
 
-from nostalgiabox.actions import Action, InputEvent
-from nostalgiabox.app import TVApp
-from nostalgiabox.config import config_from_dict
-from nostalgiabox.input.manager import InputManager
-from nostalgiabox.player import END_EOF, MockPlayer
+from timewarptv.actions import Action, InputEvent
+from timewarptv.app import TVApp
+from timewarptv.config import config_from_dict
+from timewarptv.input.manager import InputManager
+from timewarptv.player import END_EOF, MockPlayer
 from tests.helpers import FakeClock, make_show
 
 
@@ -479,21 +479,21 @@ def test_power_off_relocks_channel(tmp_path):
 
 # -- player backend selection -------------------------------------------------
 def test_default_player_backend_is_ipc_on_macos(monkeypatch):
-    import nostalgiabox.player as player_mod
+    import timewarptv.player as player_mod
 
     monkeypatch.setattr(player_mod.sys, "platform", "darwin")
     assert player_mod.default_player_backend() == "ipc"
 
 
 def test_default_player_backend_is_libmpv_elsewhere(monkeypatch):
-    import nostalgiabox.player as player_mod
+    import timewarptv.player as player_mod
 
     monkeypatch.setattr(player_mod.sys, "platform", "linux")
     assert player_mod.default_player_backend() == "libmpv"
 
 
 def test_create_player_rejects_unknown_backend():
-    from nostalgiabox.player import create_player
+    from timewarptv.player import create_player
 
     with pytest.raises(ValueError, match="unknown player backend"):
         create_player("vlc")
@@ -540,8 +540,8 @@ def test_window_keys_off_when_a_real_keyboard_is_attached(tmp_path):
 
     Otherwise one press of a remote button would be acted on twice.
     """
-    from nostalgiabox.app import _window_keys_for
-    from nostalgiabox.input.base import InputBackend
+    from timewarptv.app import _window_keys_for
+    from timewarptv.input.base import InputBackend
 
     class FakeBackend(InputBackend):
         def __init__(self, name):
@@ -716,7 +716,7 @@ def test_skip_clears_a_pending_resume_offer(tmp_path):
 
 
 def test_media_change_stops_the_app_so_systemd_can_rescan(tmp_path):
-    from nostalgiabox.media_watch import MediaWatch
+    from timewarptv.media_watch import MediaWatch
 
     app, _, clock = build_app(tmp_path)
     cfg = tmp_path / "config.yaml"
@@ -737,7 +737,7 @@ def test_media_change_stops_the_app_so_systemd_can_rescan(tmp_path):
 
 
 def test_no_watch_means_no_restarts(tmp_path):
-    """Plain `nostalgiabox` on a dev machine must not quit on a config edit."""
+    """Plain `timewarptv` on a dev machine must not quit on a config edit."""
     app, _, clock = build_app(tmp_path)
     app.start()
     app._running = True
@@ -957,7 +957,7 @@ def test_no_caption_when_turned_off(tmp_path):
 
 def test_the_guide_card_gets_no_caption(tmp_path):
     """It's a picture of the channel list, not a programme called 'Welcome'."""
-    from nostalgiabox.channel import PlayRequest
+    from timewarptv.channel import PlayRequest
 
     app, _, _ = build_app(tmp_path)
     channel = app.lineup.current
@@ -969,7 +969,7 @@ def test_the_guide_card_gets_no_caption(tmp_path):
 
 
 def test_break_clips_get_no_caption(tmp_path):
-    from nostalgiabox.channel import PlayRequest
+    from timewarptv.channel import PlayRequest
 
     app, _, _ = build_app(tmp_path)
     clip = PlayRequest(path=tmp_path / "breaks" / "snack-time.mp4", is_break=True)

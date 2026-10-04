@@ -39,18 +39,21 @@ echo "==> Installing TimewarpTV and Python dependencies"
 pip install --upgrade pip
 # Editable install so that a plain `git pull` picks up code updates without
 # needing to reinstall (just restart the service afterwards).
+# The package was once called "nostalgiabox"; drop that registration so an
+# updated box doesn't keep a stale one pointing at a folder that's gone.
+pip uninstall -y -q nostalgiabox 2>/dev/null || true
 pip install -e "${REPO_DIR}[pi]"
 
 echo "==> Generating filler assets (static + colour bars)"
-python -m nostalgiabox.static_gen || echo "   (asset generation skipped/failed - box still works)"
+python -m timewarptv.static_gen || echo "   (asset generation skipped/failed - box still works)"
 
 echo "==> Installing the retro OSD font (VT323)"
 # TimewarpTV also copies this into mpv's font dir at runtime, but installing it
 # system-wide makes it available everywhere (and to fontconfig).
 mkdir -p "${HOME}/.local/share/fonts" "${HOME}/.config/mpv/fonts"
-if compgen -G "${REPO_DIR}/nostalgiabox/assets/fonts/*.ttf" > /dev/null; then
-  cp "${REPO_DIR}"/nostalgiabox/assets/fonts/*.ttf "${HOME}/.local/share/fonts/" || true
-  cp "${REPO_DIR}"/nostalgiabox/assets/fonts/*.ttf "${HOME}/.config/mpv/fonts/" || true
+if compgen -G "${REPO_DIR}/timewarptv/assets/fonts/*.ttf" > /dev/null; then
+  cp "${REPO_DIR}"/timewarptv/assets/fonts/*.ttf "${HOME}/.local/share/fonts/" || true
+  cp "${REPO_DIR}"/timewarptv/assets/fonts/*.ttf "${HOME}/.config/mpv/fonts/" || true
   command -v fc-cache > /dev/null && fc-cache -f "${HOME}/.local/share/fonts" || true
 fi
 

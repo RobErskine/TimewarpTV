@@ -28,14 +28,14 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-from nostalgiabox.config import CrtConfig, config_from_dict  # noqa: E402
-from nostalgiabox.crt import write_shader  # noqa: E402
-from nostalgiabox.guide_gen import render_card  # noqa: E402
-import nostalgiabox.overlay as overlay_module  # noqa: E402
-from nostalgiabox.overlay import OverlayManager  # noqa: E402
-from nostalgiabox.player import MpvIpcPlayer  # noqa: E402
-from nostalgiabox.static_gen import COLORBARS_FILENAME, DEFAULT_ASSETS_DIR, main as gen_assets  # noqa: E402
-from nostalgiabox.titles import NowPlaying  # noqa: E402
+from timewarptv.config import CrtConfig, config_from_dict  # noqa: E402
+from timewarptv.crt import write_shader  # noqa: E402
+from timewarptv.guide_gen import render_card  # noqa: E402
+import timewarptv.overlay as overlay_module  # noqa: E402
+from timewarptv.overlay import OverlayManager  # noqa: E402
+from timewarptv.player import MpvIpcPlayer  # noqa: E402
+from timewarptv.static_gen import COLORBARS_FILENAME, DEFAULT_ASSETS_DIR, main as gen_assets  # noqa: E402
+from timewarptv.titles import NowPlaying  # noqa: E402
 
 OUT = REPO / "docs" / "screenshots"
 CLIP = REPO / "dev-media" / "screenshot-src" / "bbb-480p.webm"
@@ -86,7 +86,7 @@ class Shooter:
         self.player = MpvIpcPlayer(
             fullscreen=False, force_4_3=False,
             glsl_shaders=str(shader), crt_max_height=CrtConfig().max_height,
-            fonts_dir=REPO / "nostalgiabox" / "assets" / "fonts",
+            fonts_dir=REPO / "timewarptv" / "assets" / "fonts",
             extra_options={"geometry": "1280x720"},
         )
         self.osd = OverlayManager(self.player, cfg)

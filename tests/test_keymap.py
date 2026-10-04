@@ -1,7 +1,7 @@
 import pytest
 
-from nostalgiabox.actions import Action
-from nostalgiabox.input.keymap import (
+from timewarptv.actions import Action
+from timewarptv.input.keymap import (
     cec_key_to_event,
     evdev_key_to_event,
     parse_key_overrides,
@@ -82,7 +82,7 @@ def test_parse_key_overrides_empty():
 
 
 def test_keyboard_backend_override_precedence():
-    from nostalgiabox.input.keyboard import KeyboardBackend
+    from timewarptv.input.keyboard import KeyboardBackend
 
     ov = parse_key_overrides({"KEY_F5": "volume_up", "KEY_ESC": "none"})
     kb = KeyboardBackend(overrides=ov)
@@ -103,7 +103,7 @@ def test_cec_keys():
 
 def test_mpv_window_keys_all_name_real_actions():
     """A typo here would be silently dropped at runtime, so check the table."""
-    from nostalgiabox.input.keymap import MPV_WINDOW_KEYS, action_from_name
+    from timewarptv.input.keymap import MPV_WINDOW_KEYS, action_from_name
 
     for key, action in MPV_WINDOW_KEYS.items():
         assert action_from_name(action) is not None, f"{key} -> {action}"
@@ -111,7 +111,7 @@ def test_mpv_window_keys_all_name_real_actions():
 
 def test_mpv_window_keys_cover_the_same_actions_as_the_terminal():
     """Both dev inputs must drive the same remote, or one window feels broken."""
-    from nostalgiabox.input.keymap import (
+    from timewarptv.input.keymap import (
         MPV_WINDOW_KEYS,
         action_from_name,
         stdin_char_to_event,

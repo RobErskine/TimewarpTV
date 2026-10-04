@@ -1,6 +1,6 @@
 import random
 
-from nostalgiabox.playlist import ShuffleBag
+from timewarptv.playlist import ShuffleBag
 
 
 def test_bag_yields_every_item_once_per_cycle():

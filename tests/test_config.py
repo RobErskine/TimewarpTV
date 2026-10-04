@@ -1,6 +1,6 @@
 import pytest
 
-from nostalgiabox.config import (
+from timewarptv.config import (
     ConfigError,
     config_from_dict,
     load_config,
@@ -359,7 +359,7 @@ def test_bad_player_backend_rejected(tmp_path):
 
 
 def test_crt_max_height_defaults_and_parses(tmp_path):
-    from nostalgiabox.config import config_from_dict
+    from timewarptv.config import config_from_dict
 
     base = {"channels": [{"number": 2, "name": "X", "path": str(tmp_path)}]}
     assert config_from_dict(base).crt.max_height == 720

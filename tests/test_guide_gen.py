@@ -11,8 +11,8 @@ import subprocess
 
 import pytest
 
-from nostalgiabox.config import config_from_dict
-from nostalgiabox.guide_gen import CARD_HEIGHT, CARD_WIDTH, ass_script, generate_guide
+from timewarptv.config import config_from_dict
+from timewarptv.guide_gen import CARD_HEIGHT, CARD_WIDTH, ass_script, generate_guide
 
 
 def test_script_keeps_the_overlay_canvas_and_one_event_per_line():
@@ -32,7 +32,7 @@ def test_blank_lines_are_not_events():
     reason="needs mpv, ffmpeg and ffprobe",
 )
 def test_rendered_card_is_1080p_sharp_and_swapped_in_cleanly(tmp_path):
-    from nostalgiabox.config import CrtConfig
+    from timewarptv.config import CrtConfig
 
     (tmp_path / "guide").mkdir()
     config = config_from_dict({"channels": [

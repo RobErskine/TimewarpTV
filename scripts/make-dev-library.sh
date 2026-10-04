@@ -18,7 +18,7 @@ set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 MEDIA_DIR="${REPO_DIR}/dev-media"
-FONT="${REPO_DIR}/nostalgiabox/assets/fonts/VT323-Regular.ttf"
+FONT="${REPO_DIR}/timewarptv/assets/fonts/VT323-Regular.ttf"
 CONFIG_OUT="${REPO_DIR}/config.dev.yaml"
 
 WITH_BUNNY=0

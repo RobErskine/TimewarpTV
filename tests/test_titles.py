@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from nostalgiabox.titles import NowPlaying, describe
+from timewarptv.titles import NowPlaying, describe
 
 ROOT = Path("/media/tv/05-kids")
 
