@@ -106,10 +106,10 @@ a minute. Add `--with-bunny` to also download one real feature-length film;
 | **Raspberry Pi 3 Model B** | What TimewarpTV is built and tested on. A Pi 4 or 5 works too (they use a micro-HDMI cable). |
 | **Power supply** | The official Pi 3 supply (5.1 V, 2.5 A, micro-USB). A weaker phone charger causes under-voltage resets. |
 | **micro-SD card, 32 GB** | Holds the operating system only; the videos live on the drive. |
-| **USB drive for the library** | Formatted **exFAT**. For scale: 2,800 episodes and films of mostly standard-definition TV take about 430 GB. |
+| **USB drive for the library** | Formatted **exFAT**. For scale: 2,800 episodes and films of mostly standard-definition TV take about 430 GB. [This project uses a UnionSite 1TB drive](https://amzn.to/4yrPju9). |
 | **Powered USB hub** *(recommended)* | A Pi 3 struggles to power a USB hard drive by itself; a hub supplies it instead. |
-| **[Flirc USB receiver](https://flirc.tv/products/flirc-usb-receiver)** | Lets an IR remote control the Pi by turning button presses into keystrokes. |
-| **[Argon IR Remote](https://argon40.com/products/argon-remote)** | The remote the button layout below is written for. Any IR remote works with the Flirc. |
+| **[Flirc USB receiver](https://amzn.to/3VoDbLW)** | Lets an IR remote control the Pi by turning button presses into keystrokes. |
+| **[Argon IR Remote](https://amzn.to/4AKZBXO)** | The remote the button layout below is written for. Any IR remote works with the Flirc. |
 | **HDMI cable** | Full-size HDMI for a Pi 3. |
 | **A TV with HDMI** | Its own remote can control the box too, over HDMI-CEC, if the TV supports it. |
 | **A computer** (Mac or PC) | To build the media drive, flash the SD card and program the Flirc. |
