@@ -55,6 +55,7 @@ No menus. No apps. No Wi-Fi needed. Just a remote and channels.
 4. [Configuration](#4-configuration)
 5. [Troubleshooting](#5-troubleshooting)
 6. [How it works](#6-how-it-works)
+7. [Printing the case](#7-printing-the-case): the 3MF plates and the raw STLs
 
 ---
 
@@ -552,13 +553,67 @@ replace them and every screen picks up the new art.
 
 ---
 
+## 7. Printing the case
+
+The orange box in the video isn't a store-bought enclosure, it's printed! All of
+it lives in [`3d-print/`](3d-print), and there are separate Pi parts for the 3, 4
+and 5 because the standoffs and IO differ slightly between each one.
+
+![Bambu Studio with warptv-bambu-plates.3mf open: sixteen labelled build plates laid out in a grid, each holding a case part such as a Pi tray, a lid or the TIME WARP TV wordmark band](docs/screenshots/3d-print-plates.jpg)
+
+### The easy way: the 3MF
+
+Open [`3d-print/3mf/warptv-bambu-plates.3mf`](3d-print/3mf) in Bambu Studio and
+you get one project with **16 labelled plates**, so you're picking plates
+instead of hunting for files:
+
+| Plate | What's on it |
+|-------|--------------|
+| **All One Color - Pi 3** / **Pi 4** / **Pi 5** | The four parts for that Pi, ganged up on one plate. Pick the plate that matches your Pi and ignore the other two. |
+| **All One Color - Logo Bands** | The logo band and the wordmark band together. |
+| **All One Color - Logo Bands Reversed** | The same bands, oriented to print standing up. |
+| **Separate - Drive Tray** | The drive tray on its own. |
+| **Seperate - Pi 3 / Pi 4 / Pi 5 Tray** | One Pi tray per plate. |
+| **Seperate - Pi 3 / Pi 4 / Pi 5 Lid** | One lid per plate. |
+| **Separate - Pi tray hold down** | The little clamp that keeps the Pi put. |
+| **Separate - Logo Band** / **Seperate - Wordmark Band** / **Seperate - No Logo band** | The three front-band styles, one per plate. Print whichever one you want on the front. |
+
+The **All One Color** plates are the shortcut: one plate, one filament, done.
+The **Separate** plates are there for when you want a part in a different colour
+(a white band on an orange box, say) or you need to reprint one piece without
+re-slicing everything.
+
+### The other way: raw STLs
+
+If you're not on Bambu Studio, [`3d-print/stl/`](3d-print/stl) has every part as
+its own file. Anything sitting at the top level fits all three Pis; the
+Pi-specific parts are in `pi3/`, `pi4/` and `pi5/`.
+
+```
+3d-print/stl/
+├── base.stl              the drive tray
+├── pi_holddown.stl       the clamp that holds the Pi in its tray
+├── band.stl              front band, plain
+├── logo_band.stl         front band with the logo
+├── wordmark_band.stl     front band with the TIME WARP TV wordmark
+├── pi3/  deck.stl      + lid.stl
+├── pi4/  deck_pi4.stl  + lid_pi4.stl
+└── pi5/  deck_pi5.stl  + lid_pi5.stl
+```
+
+For one box: `base.stl`, `pi_holddown.stl`, the `deck` and `lid` from your Pi's
+folder, and **one** of the three bands. The bands are interchangeable, so print
+all three if you can't decide (I couldn't).
+
+---
+
 ## Credits
 
 TimewarpTV started life as a fork of **[NostalgiaBox](https://github.com/landonbtw/NostalgiaBox)**
 by [landonbtw](https://github.com/landonbtw), and the good bones are all theirs:
 the channels, the shuffle, the channel banner and volume bar, that CRT look. I
 got to stand on a working retro TV and tinker instead of starting from a blank
-file. Thank you, truly.
+file.
 
 ## License
 
